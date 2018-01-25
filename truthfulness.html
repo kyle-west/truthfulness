@@ -3,11 +3,20 @@
    <head>
       <meta charset="utf-8">
       <title>Truth Tables</title>
+      <script type="text/javascript" src="decorators.js"></script>
       <script type="text/javascript" src="logic.js"></script>
       <script type="text/javascript" src="truth.js"></script>
+      <style media="screen">
+         input, textarea {
+            font-family: monospace;
+         }
+         input[type='text'] {
+            width: 75%;
+         }
+      </style>
    </head>
    <body>
-      <input type="text" id="raw-input" value="(p --> ((q \/ r) /\ r))">
+      <input type="text" id="raw-input" value="(p --> ((q \/ r) /\ s))">
       <input type="button" onclick="crunch(this)" value="Parse It">
       <br/><br/>
       <textarea id="raw-results" rows="8" cols="50"></textarea>
