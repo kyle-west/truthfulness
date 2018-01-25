@@ -4,30 +4,34 @@ const parends  = /(\(.*\)){1}/g;
 function crunch() {
    var text = document.querySelector('#raw-input').value;
    text = text.replace(/\s+/g, '');
-   document.querySelector('#raw-results').value = parseAsTable(text);
+   document.querySelector('#raw-results').innerHTML = parseAsTable(text);
 }
+
+// NOTE: look into Djikstra's shunting yard 
 
 function parseAsTable(text) {
    var vars = text.match(new RegExp(validVar, "g"));
-   return generateTruthTable(vars);
+   var var_values = generateTruthTable(vars);
+   return new Table(var_values).toHTML();
 }
 
 
 function generateTruthTable(vars) {
-   var table = "";
    var n = vars.length;
    var size = Math.pow(2, n);
-   vars.forEach(v=>{
-      table += `| ${v} `;
-   });
-   table += "|\n";
-   var i , j;
+   var i , j, bit, valueMap;
+   var table = [];
+
    for (i = 0; i < size; i++) {
+      valueMap = {};
       for (j = n-1; j >= 0; j--) {
-         table += `| ${getBitValueByTablePosition(i, j)} `;
+         bit = getBitValueByTablePosition(i, j);
+         valueMap[vars[n-1-j]] = bit;
       }
-      table += `|\n`;
+      table.push(valueMap);
    }
+
+   console.table(table);
    return table;
 }
 
