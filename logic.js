@@ -1,32 +1,33 @@
-function Logic (operator, values = []) {
-   this.operator = operator;
-   this.values = values;
+
+
+function Logic (text) {
+   this.parse(text);
 }
 
 Logic.prototype = {
    constructor: Logic,
-   apply: function () {
-      // console.log(`Applying "${operator}" on "${lhs}" and "${rhs}"`);
-   },
 
-   toString: function () {
-      return `{${this.operator}${(this.values[0]) ? ", " + this.values[0]: ""}${(this.values[1]) ? ", " + this.values[1]: ""}}`;
-   }
-};
+   parse: function (text) {
+      var operator, lhs, rhs;
+      var sub = text.match(parends);
 
-var COMPOSIT_COUNTER = 0;
-
-function Value (symbol, isVariable = true) {
-   this.isVariable = isVariable;
-   this.isComposite = !this.isVariable;
-   if (this.isComposite) {
-      this.ref = COMPOSIT_COUNTER++;
-      this.symbol = symbol;
-   } else {
-      this.ref = symbol;
+      if (sub)
    }
 }
 
-Value.prototype.toString = function () {
-   return this.ref
-};
+
+// if (sub) {
+//    // console.log(sub);
+//    var sub_logic = createTree(sub);
+//    // var temp = text.replace(`(${sub})`, '{}');
+//    // var one = new Value(sub[sub.search(validVar)]);
+//    // var two = new Value()
+//    // console.log(`----> ${temp}, ${one}`);
+//
+// } else {
+//    lhs = text[0];
+//    rhs = text[text.length - 1];
+//    operator = text.slice(1, text.length - 1);
+//    console.log(`"${operator}" on "${lhs}" and "${rhs}"`);
+//    return new Logic(operator, [new Value(lhs), new Value(rhs)]);
+// }

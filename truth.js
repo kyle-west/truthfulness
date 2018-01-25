@@ -1,36 +1,36 @@
-var validVar = /[A-z]/;
-var parends = /(\(.*\)){1}/g;
-
-function createStack(text) {
-   var operator, lhs, rhs;
-   var sub = text.match(parends);
-   sub = sub && sub[0] && sub[0].slice(1, sub[0].length - 1);
-
-   if (sub) {
-      console.log(sub);
-      var sub_logic = createStack(sub);
-      var temp = text.replace(`(${sub})`, '{}');
-      var one = new Value(sub[sub.search(validVar)]);
-      var two = new Value()
-      console.log(`----> ${temp}, ${one}`);
-
-   } else {
-      lhs = text[0];
-      rhs = text[text.length - 1];
-      operator = text.slice(1, text.length - 1);
-      console.log(`"${operator}" on "${lhs}" and "${rhs}"`);
-      return new Logic(operator, [new Value(lhs), new Value(rhs)]);
-   }
-}
-
-function parse(text) {
-   var parsed = text;
-   createStack(text)
-   return parsed;
-}
+const validVar = /[A-z]/;
+const parends  = /(\(.*\)){1}/g;
 
 function crunch() {
    var text = document.querySelector('#raw-input').value;
    text = text.replace(/\s+/g, '');
-   document.querySelector('#raw-results').value = parse(text);
+   document.querySelector('#raw-results').value = parseAsTable(text);
+}
+
+function parseAsTable(text) {
+   var vars = text.match(new RegExp(validVar, "g"));
+   return generateTruthTable(vars);
+}
+
+
+function generateTruthTable(vars) {
+   var table = "";
+   var n = vars.length;
+   var size = Math.pow(2, n);
+   vars.forEach(v=>{
+      table += `| ${v} `;
+   });
+   table += "|\n";
+   var i , j;
+   for (i = 0; i < size; i++) {
+      for (j = n-1; j >= 0; j--) {
+         table += `| ${getBitValueByTablePosition(i, j)} `;
+      }
+      table += `|\n`;
+   }
+   return table;
+}
+
+function getBitValueByTablePosition (i, j) {
+   return (Math.floor(i/(Math.pow(2,j))) % 2) ? 1 : 0;
 }

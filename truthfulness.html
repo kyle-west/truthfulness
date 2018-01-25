@@ -4,7 +4,7 @@
       <meta charset="utf-8">
       <title>Truth Tables</title>
       <script type="text/javascript" src="decorators.js"></script>
-      <script type="text/javascript" src="logic.js"></script>
+      <!-- <script type="text/javascript" src="logic.js"></script> -->
       <script type="text/javascript" src="truth.js"></script>
       <style media="screen">
          input, textarea {
@@ -16,9 +16,9 @@
       </style>
    </head>
    <body>
-      <input type="text" id="raw-input" value="(p --> ((q \/ r) /\ s))">
+      <input type="text" id="raw-input" value="p --> s --> r --> t">
       <input type="button" onclick="crunch(this)" value="Parse It">
       <br/><br/>
-      <textarea id="raw-results" rows="8" cols="50"></textarea>
+      <textarea id="raw-results" rows="32" cols="50"></textarea>
    </body>
 </html>
