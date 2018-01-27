@@ -1,5 +1,14 @@
 const validVar = /[A-z]/;
 const parends  = /(\(.*\)){1}/g;
+const AND = "∧";
+const OR  = "∨";
+const NOT = "¬";
+const IMP = "→";
+const IFF = "↔";
+
+// (((p-->q)/\r)\/s)<->~t
+const OPS = new RegExp(`(${AND}|${OR}|${NOT}|${IMP}|${IFF})`, "g");
+
 
 function crunch() {
    var text = document.querySelector('#raw-input').value;
@@ -7,7 +16,7 @@ function crunch() {
    document.querySelector('#raw-results').innerHTML = parseAsTable(text);
 }
 
-// NOTE: look into Djikstra's shunting yard 
+// NOTE: look into Djikstra's shunting yard
 
 function parseAsTable(text) {
    var vars = text.match(new RegExp(validVar, "g"));
@@ -37,4 +46,12 @@ function generateTruthTable(vars) {
 
 function getBitValueByTablePosition (i, j) {
    return (Math.floor(i/(Math.pow(2,j))) % 2) ? 1 : 0;
+}
+
+function interpretSymbols(text) {
+   return text.replace("/\\", AND)
+              .replace("\\/", OR )
+              .replace("~"  , NOT)
+              .replace("-->", IMP)
+              .replace("<->", IFF);
 }

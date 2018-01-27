@@ -7,19 +7,35 @@
       <!-- <script type="text/javascript" src="logic.js"></script> -->
       <script type="text/javascript" src="truth.js"></script>
       <style media="screen">
-         input, textarea {
+         * {
             font-family: monospace;
+            font-size: 12pt;
          }
          input[type='text'] {
             width: 75%;
          }
          table {
             border: 1px solid black;
+            border-collapse: collapse;
+            width: 100%;
          }
+         th {
+            background-color: grey;
+            color: white;
+         }
+         th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+         }
+         tr:nth-child(even) {
+            background-color: #f0f0f0;
+         }
+
       </style>
    </head>
    <body>
-      <input type="text" id="raw-input" value="p --> s --> r --> t">
+      <input type="text" id="raw-input" value="p --> q" onkeypress="this.value=interpretSymbols(this.value)">
       <input type="button" onclick="crunch(this)" value="Parse It">
       <br/><br/>
       <!-- <textarea id="raw-results" rows="32" cols="50"></textarea> -->
