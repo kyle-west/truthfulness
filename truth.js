@@ -1,27 +1,18 @@
-const validVar = /[A-z]/;
-const parends  = /(\(.*\)){1}/g;
-const AND = "∧";
-const OR  = "∨";
-const NOT = "¬";
-const IMP = "→";
-const IFF = "↔";
-
-// (((p-->q)/\r)\/s)<->~t
-const OPS = new RegExp(`(${AND}|${OR}|${NOT}|${IMP}|${IFF})`, "g");
-
-
-function crunch() {
+function crunch () {
    var text = document.querySelector('#raw-input').value;
-   text = text.replace(/\s+/g, '');
+   text = interpretSymbols(text).replace(/\s+/g, '');
    document.querySelector('#raw-results').innerHTML = parseAsTable(text);
 }
 
-// NOTE: look into Djikstra's shunting yard
 
-function parseAsTable(text) {
+function parseAsTable (text) {
    var vars = text.match(new RegExp(validVar, "g"));
-   var var_values = generateTruthTable(vars);
-   return new Table(var_values).toHTML();
+   vars.values = generateTruthTable(vars);
+   vars.values.forEach(val => {
+      val[text] = evalutate(text, val)
+   });
+
+   return new Table(vars.values).toHTML();
 }
 
 
@@ -44,11 +35,13 @@ function generateTruthTable(vars) {
    return table;
 }
 
+
 function getBitValueByTablePosition (i, j) {
    return (Math.floor(i/(Math.pow(2,j))) % 2) ? 1 : 0;
 }
 
-function interpretSymbols(text) {
+
+function interpretSymbols (text) {
    return text.replace("/\\", AND)
               .replace("\\/", OR )
               .replace("~"  , NOT)

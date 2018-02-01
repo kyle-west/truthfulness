@@ -3,8 +3,9 @@
    <head>
       <meta charset="utf-8">
       <title>Truth Tables</title>
+      <script type="text/javascript" src="constants.js"></script>
       <script type="text/javascript" src="understanding.js"></script>
-      <!-- <script type="text/javascript" src="logic.js"></script> -->
+      <script type="text/javascript" src="logic.js"></script>
       <script type="text/javascript" src="truth.js"></script>
       <style media="screen">
          * {
@@ -35,10 +36,13 @@
       </style>
    </head>
    <body>
-      <input type="text" id="raw-input" value="p --> q" onkeypress="this.value=interpretSymbols(this.value)">
-      <input type="button" onclick="crunch(this)" value="Parse It">
+      <form onsubmit="return false;">
+         <input type="text" id="raw-input" value="p ∧ (q ∧ r)" onkeyup="this.value=interpretSymbols(this.value)">
+         <input type="submit" onclick="crunch(this)" value="Parse It">
+      </form>
       <br/><br/>
-      <!-- <textarea id="raw-results" rows="32" cols="50"></textarea> -->
+      <!-- <input type="button" onclick="" value="Copy as JSON">
+      <input type="button" onclick="" value="Copy as ORG Table"> -->
       <div id="raw-results"></div>
    </body>
 </html>
