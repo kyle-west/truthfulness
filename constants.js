@@ -13,3 +13,11 @@ const ALL_IMP = new RegExp(IMP, "g");
 const ALL_IFF = new RegExp(IFF, "g");
 
 const OPS = new RegExp(`(${AND}|${OR}|${NOT}|${IMP}|${IFF})`, "g");
+
+String.prototype.repeat = function (times) {
+   var str = "", i;
+   for (i = 0; i < times; i++) {
+      str += this;
+   }
+   return str;
+}

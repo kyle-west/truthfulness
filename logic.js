@@ -7,7 +7,7 @@ function evalutate (equation, values) {
 
    eq = convertOPStoJS(eq)
 
-   console.log(`${equation} ==> ${eq}       = '${eval(eq)}'`);
+   console.log(`${equation} ==> ${eq}   ------------->   '${eval(eq)}'`);
    return new Number(eval(eq))
 }
 

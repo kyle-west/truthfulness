@@ -1,7 +1,11 @@
 function crunch () {
    var text = document.querySelector('#raw-input').value;
    text = interpretSymbols(text).replace(/\s+/g, '');
-   document.querySelector('#raw-results').innerHTML = parseAsTable(text);
+   var table = parseAsTable(text);
+
+   document.querySelector('#raw-results').innerHTML = table.toHTML();
+   document.querySelector('#json-table' ).innerHTML = table.toJSON();
+   document.querySelector('#org-table'  ).innerHTML = table.toORG();
 }
 
 
@@ -11,8 +15,7 @@ function parseAsTable (text) {
    vars.values.forEach(val => {
       val[text] = evalutate(text, val)
    });
-
-   return new Table(vars.values).toHTML();
+   return new Table(vars.values);
 }
 
 

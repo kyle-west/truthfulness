@@ -33,16 +33,78 @@
             background-color: #f0f0f0;
          }
 
+         #json-table, #org-table {
+            width: 100%;
+            height: 200px;
+         }
+
+         main {
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+         }
+
+         .box-50 {
+            width: 50%;
+            margin-top: 50px;
+            float: left;
+         }
+
+         .notify {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: -20px;
+            font-weight: bold;
+            color: forestgreen;
+            opacity: 0;
+            transition: opacity .5s;
+            font-size: 15pt;
+         }
+
+         .notify.show {
+            opacity: 1;
+         }
       </style>
+      <script type="text/javascript">
+         function copyToClipboard(elem) {
+            elem.select();
+            document.execCommand("Copy");
+         }
+         function copyAsJSON() {
+            copyToClipboard(document.getElementById("json-table"));
+            notify();
+         }
+         function copyAsORG() {
+            copyToClipboard(document.getElementById("org-table"));
+            notify();
+         }
+
+         function notify() {
+            document.querySelector('.notify').classList.add('show');
+            setTimeout(_=>document.querySelector('.notify').classList.remove('show'), 2000)
+         }
+      </script>
    </head>
    <body>
-      <form onsubmit="return false;">
-         <input type="text" id="raw-input" value="p ∧ (q ∧ r)" onkeyup="this.value=interpretSymbols(this.value)">
-         <input type="submit" onclick="crunch(this)" value="Parse It">
-      </form>
-      <br/><br/>
-      <!-- <input type="button" onclick="" value="Copy as JSON">
-      <input type="button" onclick="" value="Copy as ORG Table"> -->
-      <div id="raw-results"></div>
+      <main>
+         <form onsubmit="return false;">
+            <input type="text" id="raw-input" value="p ∧ (q → r)" onkeyup="this.value=interpretSymbols(this.value)">
+            <!-- <input type="text" id="raw-input" value="(((p → q) ∧ r) ∨ s) ↔ ¬t" onkeyup="this.value=interpretSymbols(this.value)"> -->
+            <input type="submit" onclick="crunch(this)" value="Evaluate">
+         </form>
+         <br/><br/>
+         <div id="raw-results">
+            Type in an expression, then hit the [Evaluate] button to see the results.
+         </div>
+         <div class="notify">Copied!</div>
+         <div class="box-50">
+            <input type="button" onclick="copyAsORG()" value="Copy as ORG Table">
+            <textarea id='org-table'></textarea>
+         </div>
+         <div class="box-50">
+            <input type="button" onclick="copyAsJSON()" value="Copy as JSON"><br/>
+            <textarea id='json-table'></textarea>
+         </div>
+      </main>
    </body>
 </html>
