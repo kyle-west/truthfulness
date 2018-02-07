@@ -92,14 +92,17 @@
    </head>
    <body>
       <main>
+         <p>
+            Type in an expression, then hit the [Evaluate] button to see the results.
+         </p>
          <form onsubmit="return false;">
-            <input type="text" id="raw-input" value="¬(p ↔ t) ∧ (¬q → ¬(r ∨ s))" onkeyup="this.value=interpretSymbols(this.value)">
+            <input type="text" id="raw-input" value="¬(q → ¬(r ∨ s))" onkeyup="this.value=interpretSymbols(this.value)">
+            <!-- <input type="text" id="raw-input" value="¬(p ↔ t) ∧ (¬q → ¬(r ∨ s))" onkeyup="this.value=interpretSymbols(this.value)"> -->
             <!-- <input type="text" id="raw-input" value="(((p → q) ∧ r) ∨ s) ↔ ¬t" onkeyup="this.value=interpretSymbols(this.value)"> -->
             <input type="submit" onclick="crunch(this)" value="Evaluate">
          </form>
          <br/><br/>
          <div id="raw-results">
-            Type in an expression, then hit the [Evaluate] button to see the results.
          </div>
          <div class="notify">Copied!</div>
          <div class="box-70">
