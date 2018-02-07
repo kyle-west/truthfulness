@@ -40,12 +40,17 @@
 
          main {
             width: 100%;
-            max-width: 700px;
+            max-width: 850px;
             margin: auto;
          }
 
-         .box-50 {
-            width: 50%;
+         .box-70 {
+            width: 70%;
+            margin-top: 50px;
+            float: left;
+         }
+         .box-30 {
+            width: 30%;
             margin-top: 50px;
             float: left;
          }
@@ -88,7 +93,7 @@
    <body>
       <main>
          <form onsubmit="return false;">
-            <input type="text" id="raw-input" value="p ∧ (q → r)" onkeyup="this.value=interpretSymbols(this.value)">
+            <input type="text" id="raw-input" value="¬(p ↔ t) ∧ (¬q → ¬(r ∨ s))" onkeyup="this.value=interpretSymbols(this.value)">
             <!-- <input type="text" id="raw-input" value="(((p → q) ∧ r) ∨ s) ↔ ¬t" onkeyup="this.value=interpretSymbols(this.value)"> -->
             <input type="submit" onclick="crunch(this)" value="Evaluate">
          </form>
@@ -97,11 +102,11 @@
             Type in an expression, then hit the [Evaluate] button to see the results.
          </div>
          <div class="notify">Copied!</div>
-         <div class="box-50">
+         <div class="box-70">
             <input type="button" onclick="copyAsORG()" value="Copy as ORG Table">
             <textarea id='org-table'></textarea>
          </div>
-         <div class="box-50">
+         <div class="box-30">
             <input type="button" onclick="copyAsJSON()" value="Copy as JSON"><br/>
             <textarea id='json-table'></textarea>
          </div>

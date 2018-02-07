@@ -1,7 +1,9 @@
+"use strict";
+
 function crunch () {
    var text = document.querySelector('#raw-input').value;
    text = interpretSymbols(text).replace(/\s+/g, '');
-   var table = parseAsTable(text);
+   var table = parseAsInlineTable(text);
 
    document.querySelector('#raw-results').innerHTML = table.toHTML();
    document.querySelector('#json-table' ).innerHTML = table.toJSON();
@@ -9,13 +11,88 @@ function crunch () {
 }
 
 
-function parseAsTable (text) {
+function parseAsInlineTable (text) {
+   var chars = text.split(""), calcs = [], results = [];
+
+   // set up the calcuation strings for each cell.
+   chars.forEach((c, idx) => {
+      if (validVar.test(c)) {
+         calcs.push(c);
+      } else if (OPS.test(c)) {
+         calcs.push(getLocalExecutionString(text, idx));
+      } else {
+         calcs.push(null);
+      }
+   });
+
    var vars = text.match(new RegExp(validVar, "g"));
    vars.values = generateTruthTable(vars);
    vars.values.forEach(val => {
-      val[text] = evalutate(text, val)
+      var row = [];
+      calcs.forEach(col => {
+         if (!col) {
+            row.push("&nbsp;");
+         } else {
+            row.push(evalutate(col, val));
+         }
+      });
+      results.push(row);
    });
-   return new Table(vars.values);
+
+   return new Table([chars, results]);
+}
+
+function getLocalExecutionString(text, idx) {
+   var rhs = "", lhs = "";
+
+   function nearestRight () {
+      var i = idx+1, right = "", parends = 0;
+      if (text[i] === NOT) {
+         right = text[i]; i++;
+      }
+      do {
+         if (text[i] === "(") parends++;
+         if (text[i] === ")") parends--;
+         right += text[i];
+         i++;
+      } while (parends > 0);
+      return right;
+   }
+
+   function nearestLeft () {
+      var i = idx-1, left = "", parends = 0;
+      do {
+         if (text[i] === ")") parends++;
+         if (text[i] === "(") parends--;
+         left = text[i] + left;
+         i--;
+      } while (parends > 0);
+      if (text[i] === NOT) {
+         left = text[i] + left;
+      }
+      return left;
+   }
+
+   // get right side of operator
+   if (validVar.test(text[idx+1])) {
+      rhs = text[idx+1];
+   } else {
+      rhs = nearestRight();
+   }
+
+   // NOT does not have a left operand
+   if (text[idx] === NOT) {
+      return convertOPStoJS(text[idx] + rhs);
+   }
+
+   // get left side of operator
+   if (validVar.test(text[idx-1])) {
+      lhs = text[idx-1];
+   } else {
+      lhs = nearestLeft();
+   }
+
+   return convertOPStoJS(lhs + text[idx] + rhs);
 }
 
 
@@ -34,7 +111,6 @@ function generateTruthTable(vars) {
       table.push(valueMap);
    }
 
-   console.table(table);
    return table;
 }
 

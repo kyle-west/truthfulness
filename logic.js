@@ -1,5 +1,4 @@
 function evalutate (equation, values) {
-   console.log(values);
    var eq = equation;
    Object.keys(values).forEach(v => {
       eq = eq.replace(new RegExp(v, "g"), values[v]);
@@ -7,7 +6,6 @@ function evalutate (equation, values) {
 
    eq = convertOPStoJS(eq)
 
-   console.log(`${equation} ==> ${eq}   ------------->   '${eval(eq)}'`);
    return new Number(eval(eq))
 }
 

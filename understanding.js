@@ -4,8 +4,8 @@
 ******************************************************************************/
 
 function Table (data) {
-   this.data = data;
-   this.names = Object.keys(data[0]);
+   this.names = data[0];
+   this.data = data[1];
 }
 
 Table.prototype = {
@@ -15,8 +15,8 @@ Table.prototype = {
       var html = `<table>${this._headerHTML()}<tbody>`;
       this.data.forEach((row) => {
          html += "<tr>";
-         this.names.forEach((name) => {
-            html += `<td>${row[name]}</td>`
+         this.names.forEach((name, index) => {
+            html += `<td>${row[index]}</td>`;
          });
          html += "</tr>";
       });
@@ -32,16 +32,18 @@ Table.prototype = {
    },
 
    toJSON : function () {
-      return JSON.stringify(this.data, null, 2);
+      return JSON.stringify({
+         headers: this.names, data: this.data
+      }, null, 2);
    },
 
    toORG: function () {
-      var org = this._headerORG()
+      var org = this._headerORG();
       this.data.forEach((row) => {
          org += "|";
-         this.names.forEach((name) => {
+         this.names.forEach((name, index) => {
             org += " ".repeat(name.length/2)
-                + row[name]
+                + row[index]
                 + " ".repeat(name.length/2)
                 + ((name.length % 2 == 0) ? " " : "")
                 + "|";
