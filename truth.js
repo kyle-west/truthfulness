@@ -22,14 +22,15 @@ function main () {
 
 function validInput () {
    // TODO: Check for well formed input
-   return true;
+   var text = document.querySelector('#raw-input').value;
+   return text.length !== 0;
 }
 
 
 function computeAndDisplayResults () {
    var results = document.querySelector('#raw-results');
    var text = document.querySelector('#raw-input').value;
-   text = interpretSymbols(text).replace(/\s+/g, '');
+   text = interpretSymbols(text).text.replace(/\s+/g, '');
    var table = parseAsInlineTable(text);
 
    toggleSpinner();
@@ -149,9 +150,30 @@ function getBitValueByTablePosition (i, j) {
 
 
 function interpretSymbols (text) {
-   return text.replace("/\\", AND)
-              .replace("\\/", OR )
-              .replace("~"  , NOT)
-              .replace("-->", IMP)
-              .replace("<->", IFF);
+   var alt;
+   alt = text.replace("/\\",  AND)
+             .replace("&&",   AND)
+             .replace(/and/i, AND)
+
+             .replace("\\/", OR )
+             .replace("||",  OR )
+             .replace(/or/i, OR )
+
+             .replace("~"  ,  NOT)
+             .replace("`"  ,  NOT)
+             .replace("!"  ,  NOT)
+             .replace(/not/i, NOT)
+
+             .replace("<--->", IFF)
+             .replace("<-->",  IFF)
+             .replace("<->",   IFF)
+             .replace("<>",    IFF)
+             .replace(/iff/i,  IFF)
+
+             .replace("--->", IMP)
+             .replace("-->",  IMP)
+             .replace("->",   IMP)
+             .replace(">",   IMP)
+             .replace(/imp/i, IMP);
+   return {text: alt, sizeDiff: alt.length - text.length};
 }

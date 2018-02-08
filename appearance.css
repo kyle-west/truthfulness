@@ -3,8 +3,14 @@
    font-size: 12pt;
 }
 input[type='text'] {
-   width: 75%;
+   width: 80%;
+   font-size: 18pt;
 }
+input.eval {
+   font-size: 18pt;
+   width: 18%;
+}
+
 table {
    border: 1px solid black;
    border-collapse: collapse;

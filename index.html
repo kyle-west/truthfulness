@@ -28,7 +28,7 @@
          }
       </script>
    </head>
-   <body>
+   <body onload="document.getElementById('raw-input').focus()">
       <main>
          <h1>Truth Table Generator</h1>
          <hr>
@@ -36,10 +36,8 @@
             Type in an expression, then hit the [Evaluate] button to see the results.
          </p>
          <form onsubmit="return false;">
-            <!-- <input type="text" id="raw-input" value="¬(q → ¬(r ∨ s))" onkeyup="this.value=interpretSymbols(this.value)"> -->
-            <input type="text" id="raw-input" value="¬(p ↔ t) ∧ (¬q → ¬(r ∨ s))" onkeyup="this.value=interpretSymbols(this.value)">
-            <!-- <input type="text" id="raw-input" value="a → b → c → d → e → f → g → h → i → j" onkeyup="this.value=interpretSymbols(this.value)"> -->
-            <input type="submit" onclick="main()" value="Evaluate">
+            <input type="text" id="raw-input" placeholder="Example: p ∨ ¬q">
+            <input type="submit" class="eval" onclick="main()" value="Evaluate">
          </form>
          <br/><br/>
          <div id="raw-results">
@@ -58,5 +56,15 @@
          Created by <a href="https://github.com/kyle-west">Kyle West</a> <br>
          Hosted on <a href="https://github.com/kyle-west/truthfulness">GitHub</a>
       </div>
+
+      <script>
+         // return the cursor to its "original" position after pretty print
+         document.getElementById("raw-input").addEventListener("input", (e) => {
+            var prettyText = interpretSymbols(e.target.value);
+            var cursorPos  = e.target.selectionStart + prettyText.sizeDiff;
+            e.target.value = prettyText.text;
+            e.target.setSelectionRange(cursorPos, cursorPos);
+         });
+      </script>
    </body>
 </html>
