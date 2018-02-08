@@ -1,0 +1,125 @@
+*:not(h1) {
+   font-family: monospace;
+   font-size: 12pt;
+}
+input[type='text'] {
+   width: 75%;
+}
+table {
+   border: 1px solid black;
+   border-collapse: collapse;
+   width: 100%;
+}
+thead {
+   border-bottom: 2px solid black;
+}
+th {
+   color: black;
+   background-color: white;
+   font-size: 16pt;
+}
+th, td {
+   border: 1px solid #ddd;
+   padding: 8px;
+   text-align: center;
+}
+td.var, th.var {
+   background-color: #baffed;
+}
+
+#json-table, #org-table {
+   width: 100%;
+   height: 200px;
+}
+
+main {
+   width: 100%;
+   max-width: 850px;
+   margin: auto;
+}
+
+.box-70 {
+   width: 70%;
+   margin-top: 50px;
+   float: left;
+   margin-bottom: 50px;
+}
+.box-30 {
+   width: 30%;
+   margin-top: 50px;
+   float: left;
+   margin-bottom: 50px;
+}
+
+.notify {
+   text-align: center;
+   margin-top: 20px;
+   margin-bottom: -20px;
+   font-weight: bold;
+   color: forestgreen;
+   opacity: 0;
+   transition: opacity .5s;
+   font-size: 15pt;
+}
+
+.notify.show {
+   opacity: 1;
+}
+
+.credits {
+   position: fixed;
+   right: 5px;
+   bottom: 5px;
+   font-size: 8pt;
+}
+.credits * {
+   font-size: 8pt;
+}
+
+.op {
+   font-size: 20pt;
+}
+.op.not {
+   color: magenta;
+}
+.op.imp {
+   color: blue;
+}
+.op.iff {
+   color: purple;
+}
+.op.or {
+   color: red;
+   font-size: 18pt;
+}
+.op.and {
+   font-size: 18pt;
+   color: orange;
+}
+.op.parend {
+   font-size: 18pt;
+   color: grey;
+}
+
+
+/* Spinner code adapted from https://www.w3schools.com/howto/howto_css_loader.asp */
+.spinner {
+ border: 8px solid #baffed;
+ border-radius: 50%;
+ border-top: 8px solid #25cea4;
+ width: 75px;
+ height: 75px;
+ margin: auto;
+ -webkit-animation: spin .5s linear infinite;
+ animation: spin .5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+ 0% { -webkit-transform: rotate(0deg); }
+ 100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+ 0% { transform: rotate(0deg); }
+ 100% { transform: rotate(360deg); }
+}

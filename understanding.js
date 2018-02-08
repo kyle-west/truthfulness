@@ -16,7 +16,7 @@ Table.prototype = {
       this.data.forEach((row) => {
          html += "<tr>";
          this.names.forEach((name, index) => {
-            html += `<td>${row[index]}</td>`;
+            html += `<td${validVar.test(name) ? " class='var'" : ""}>${row[index]}</td>`;
          });
          html += "</tr>";
       });
@@ -26,7 +26,22 @@ Table.prototype = {
    _headerHTML: function () {
       var html = "<thead><tr>";
       this.names.forEach((name) => {
-         html += `<th>${name}</th>`;
+         var cl = "";
+         if (["(",")"].includes(name)) {
+            cl = " class = 'op parend'"
+         } else if (validVar.test(name)) {
+            cl = " class='var'";
+         } else if (OPS.test(name)) {
+            switch (name) {
+               case NOT: cl = " class = 'op not'"; break;
+               case AND: cl = " class = 'op and'"; break;
+               case OR:  cl = " class = 'op or'"; break;
+               case IMP: cl = " class = 'op imp'"; break;
+               case IFF: cl = " class = 'op iff'"; break;
+            }
+         }
+
+         html += `<th${cl}>${name}</th>`;
       });
       return html + "</tr></thead>";
    },
