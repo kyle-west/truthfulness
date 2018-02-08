@@ -8,7 +8,7 @@
       <script type="text/javascript" src="logic.js"></script>
       <script type="text/javascript" src="truth.js"></script>
       <style media="screen">
-         * {
+         *:not(h1) {
             font-family: monospace;
             font-size: 12pt;
          }
@@ -48,11 +48,13 @@
             width: 70%;
             margin-top: 50px;
             float: left;
+            margin-bottom: 50px;
          }
          .box-30 {
             width: 30%;
             margin-top: 50px;
             float: left;
+            margin-bottom: 50px;
          }
 
          .notify {
@@ -70,6 +72,17 @@
             opacity: 1;
          }
 
+         .credits {
+            position: fixed;
+            right: 5px;
+            bottom: 5px;
+            font-size: 8pt;
+         }
+         .credits * {
+            font-size: 8pt;
+         }
+
+         /* Spinner code adapted from https://www.w3schools.com/howto/howto_css_loader.asp */
          .spinner {
            border: 8px solid #baffed;
            border-radius: 50%;
@@ -113,13 +126,15 @@
    </head>
    <body>
       <main>
+         <h1>Truth Table Generator</h1>
+         <hr>
          <p>
             Type in an expression, then hit the [Evaluate] button to see the results.
          </p>
          <form onsubmit="return false;">
-            <!-- <input type="text" id="raw-input" value="¬(q → ¬(r ∨ s))" onkeyup="this.value=interpretSymbols(this.value)"> -->
+            <input type="text" id="raw-input" value="¬(q → ¬(r ∨ s))" onkeyup="this.value=interpretSymbols(this.value)">
             <!-- <input type="text" id="raw-input" value="¬(p ↔ t) ∧ (¬q → ¬(r ∨ s))" onkeyup="this.value=interpretSymbols(this.value)"> -->
-            <input type="text" id="raw-input" value="a → b → c → d → e → f → g → h → i → j" onkeyup="this.value=interpretSymbols(this.value)">
+            <!-- <input type="text" id="raw-input" value="a → b → c → d → e → f → g → h → i → j" onkeyup="this.value=interpretSymbols(this.value)"> -->
             <input type="submit" onclick="main()" value="Evaluate">
          </form>
          <br/><br/>
@@ -135,5 +150,9 @@
             <textarea id='json-table'></textarea>
          </div>
       </main>
+      <div class="credits">
+         Created by <a href="https://github.com/kyle-west">Kyle West</a> <br>
+         Hosted on <a href="https://github.com/kyle-west/truthfulness">GitHub</a>
+      </div>
    </body>
 </html>

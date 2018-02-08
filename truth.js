@@ -14,7 +14,7 @@ function toggleSpinner() {
 function main () {
    if (validInput()) {
       toggleSpinner();
-      // we need to give enough time to the spinner to display,
+      // we need to give enough time for the spinner to display,
       // otherwise the computeAndDisplayResults function hogs all the CPU
       setTimeout(computeAndDisplayResults, 10);
    }
