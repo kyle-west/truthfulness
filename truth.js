@@ -1,13 +1,41 @@
 "use strict";
 
-function crunch () {
+function toggleSpinner() {
+   var results = document.querySelector('#raw-results');
+   if (results.classList.contains("spinner")) {
+      results.classList.remove("spinner");
+   } else {
+      results.innerHTML = "";
+      results.classList.add("spinner");
+   }
+}
+
+
+function main () {
+   if (validInput()) {
+      toggleSpinner();
+      // we need to give enough time to the spinner to display,
+      // otherwise the computeAndDisplayResults function hogs all the CPU
+      setTimeout(computeAndDisplayResults, 10);
+   }
+}
+
+function validInput () {
+   // TODO: Check for well formed input
+   return true;
+}
+
+
+function computeAndDisplayResults () {
+   var results = document.querySelector('#raw-results');
    var text = document.querySelector('#raw-input').value;
    text = interpretSymbols(text).replace(/\s+/g, '');
    var table = parseAsInlineTable(text);
 
-   document.querySelector('#raw-results').innerHTML = table.toHTML();
-   document.querySelector('#json-table' ).innerHTML = table.toJSON();
-   document.querySelector('#org-table'  ).innerHTML = table.toORG();
+   toggleSpinner();
+   results.innerHTML = table.toHTML();
+   document.querySelector('#json-table').innerHTML = table.toJSON();
+   document.querySelector('#org-table' ).innerHTML = table.toORG();
 }
 
 

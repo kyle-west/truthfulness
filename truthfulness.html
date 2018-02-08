@@ -69,6 +69,27 @@
          .notify.show {
             opacity: 1;
          }
+
+         .spinner {
+           border: 8px solid #baffed;
+           border-radius: 50%;
+           border-top: 8px solid #25cea4;
+           width: 75px;
+           height: 75px;
+           margin: auto;
+           -webkit-animation: spin .5s linear infinite;
+           animation: spin .5s linear infinite;
+         }
+
+         @-webkit-keyframes spin {
+           0% { -webkit-transform: rotate(0deg); }
+           100% { -webkit-transform: rotate(360deg); }
+         }
+
+         @keyframes spin {
+           0% { transform: rotate(0deg); }
+           100% { transform: rotate(360deg); }
+         }
       </style>
       <script type="text/javascript">
          function copyToClipboard(elem) {
@@ -96,10 +117,10 @@
             Type in an expression, then hit the [Evaluate] button to see the results.
          </p>
          <form onsubmit="return false;">
-            <input type="text" id="raw-input" value="¬(q → ¬(r ∨ s))" onkeyup="this.value=interpretSymbols(this.value)">
+            <!-- <input type="text" id="raw-input" value="¬(q → ¬(r ∨ s))" onkeyup="this.value=interpretSymbols(this.value)"> -->
             <!-- <input type="text" id="raw-input" value="¬(p ↔ t) ∧ (¬q → ¬(r ∨ s))" onkeyup="this.value=interpretSymbols(this.value)"> -->
-            <!-- <input type="text" id="raw-input" value="(((p → q) ∧ r) ∨ s) ↔ ¬t" onkeyup="this.value=interpretSymbols(this.value)"> -->
-            <input type="submit" onclick="crunch(this)" value="Evaluate">
+            <input type="text" id="raw-input" value="a → b → c → d → e → f → g → h → i → j" onkeyup="this.value=interpretSymbols(this.value)">
+            <input type="submit" onclick="main()" value="Evaluate">
          </form>
          <br/><br/>
          <div id="raw-results">
