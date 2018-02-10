@@ -36,6 +36,7 @@ Table.prototype = {
                case NOT: cl = " class = 'op not'"; break;
                case AND: cl = " class = 'op and'"; break;
                case OR:  cl = " class = 'op or'"; break;
+               case XOR: cl = " class = 'op xor'"; break;
                case IMP: cl = " class = 'op imp'"; break;
                case IFF: cl = " class = 'op iff'"; break;
             }

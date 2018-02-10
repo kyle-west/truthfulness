@@ -154,6 +154,10 @@ function interpretSymbols (text) {
    alt = text.replace("/\\",  AND)
              .replace("&&",   AND)
              .replace(/and/i, AND)
+             
+             .replace("(+)",  XOR)
+             .replace("+",    XOR)
+             .replace(/xor/i, XOR)
 
              .replace("\\/", OR )
              .replace("||",  OR )

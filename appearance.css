@@ -98,6 +98,10 @@ main {
    color: red;
    font-size: 18pt;
 }
+.op.xor {
+   color: orangered;
+   font-size: 16pt;
+}
 .op.and {
    font-size: 18pt;
    color: orange;
