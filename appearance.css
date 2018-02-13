@@ -88,6 +88,9 @@ main {
 .op.not {
    color: magenta;
 }
+.op.nor {
+   color: #ff45ff;
+}
 .op.imp {
    color: blue;
 }

@@ -154,19 +154,16 @@ function interpretSymbols (text) {
    alt = text.replace("/\\",  AND)
              .replace("&&",   AND)
              .replace(/and/i, AND)
-             
+
              .replace("(+)",  XOR)
              .replace("+",    XOR)
              .replace(/xor/i, XOR)
 
-             .replace("\\/", OR )
-             .replace("||",  OR )
-             .replace(/or/i, OR )
+             .replace(/nor/i, NOR)
 
-             .replace("~"  ,  NOT)
-             .replace("`"  ,  NOT)
-             .replace("!"  ,  NOT)
-             .replace(/not/i, NOT)
+             .replace("\\/",  OR )
+             .replace("||",   OR )
+             .replace(/or/i,  OR )
 
              .replace("<--->", IFF)
              .replace("<-->",  IFF)
@@ -177,7 +174,15 @@ function interpretSymbols (text) {
              .replace("--->", IMP)
              .replace("-->",  IMP)
              .replace("->",   IMP)
-             .replace(">",   IMP)
-             .replace(/imp/i, IMP);
+             .replace(">",    IMP)
+             .replace(/imp/i, IMP)
+
+             .replace("-"  ,  NOT)
+             .replace("~"  ,  NOT)
+             .replace("`"  ,  NOT)
+             .replace("!"  ,  NOT)
+             .replace(/not/i, NOT)
+
+             .replace(NOT+OR, NOR);
    return {text: alt, sizeDiff: alt.length - text.length};
 }
