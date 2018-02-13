@@ -109,6 +109,10 @@ main {
    font-size: 18pt;
    color: orange;
 }
+.op.nand {
+   font-size: 18pt;
+   color: forestgreen;
+}
 .op.parend {
    font-size: 18pt;
    color: grey;

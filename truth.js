@@ -151,7 +151,9 @@ function getBitValueByTablePosition (i, j) {
 
 function interpretSymbols (text) {
    var alt;
-   alt = text.replace("/\\",  AND)
+   alt = text.replace(/nand/i, NAND)
+   
+             .replace("/\\",  AND)
              .replace("&&",   AND)
              .replace(/and/i, AND)
 
@@ -183,6 +185,7 @@ function interpretSymbols (text) {
              .replace("!"  ,  NOT)
              .replace(/not/i, NOT)
 
-             .replace(NOT+OR, NOR);
+             .replace(NOT+OR, NOR)
+             .replace(NOT+AND, NAND);
    return {text: alt, sizeDiff: alt.length - text.length};
 }

@@ -35,6 +35,7 @@ Table.prototype = {
             switch (name) {
                case NOT: cl = " class = 'op not'"; break;
                case AND: cl = " class = 'op and'"; break;
+               case NAND: cl = " class = 'op nand'"; break;
                case OR:  cl = " class = 'op or'";  break;
                case NOR: cl = " class = 'op nor'"; break;
                case XOR: cl = " class = 'op xor'"; break;

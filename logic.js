@@ -11,6 +11,7 @@ function evalutate (equation, values) {
 
 function convertOPStoJS (opStr) {
    return opStr.replace(ALL_AND, "&&")
+               .replace(ALL_NAND, "!==1||1!==")
                .replace(ALL_OR,  "||")
                .replace(ALL_NOR, "==0&&0==")
                .replace(ALL_XOR, "!=")
