@@ -5,31 +5,13 @@
       <title>Truth Tables</title>
       <script type="text/javascript" src="constants.js"></script>
       <script type="text/javascript" src="understanding.js"></script>
+      <script type="text/javascript" src="io-control.js"></script>
       <script type="text/javascript" src="logic.js"></script>
       <script type="text/javascript" src="truth.js"></script>
       <link rel="stylesheet" href="appearance.css">
       <link rel="icon" href="favicon.ico" />
-      <script type="text/javascript">
-         function copyToClipboard(elem) {
-            elem.select();
-            document.execCommand("Copy");
-         }
-         function copyAsJSON() {
-            copyToClipboard(document.getElementById("json-table"));
-            notify();
-         }
-         function copyAsORG() {
-            copyToClipboard(document.getElementById("org-table"));
-            notify();
-         }
-
-         function notify() {
-            document.querySelector('.notify').classList.add('show');
-            setTimeout(_=>document.querySelector('.notify').classList.remove('show'), 2000)
-         }
-      </script>
    </head>
-   <body onload="document.getElementById('raw-input').focus()">
+   <body onload="io_init()">
       <main>
          <h1>Truth Table Generator</h1>
          <hr>

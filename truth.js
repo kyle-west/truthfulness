@@ -1,32 +1,5 @@
-"use strict";
-
-const OUTPUT = {};
-
-OUTPUT.toggleSpinner = function (forceRemove = false) {
-   OUTPUT.printElem = OUTPUT.printElem || document.getElementById('raw-results');
-   if (OUTPUT.printElem.classList.contains("spinner") || forceRemove) {
-      OUTPUT.printElem.classList.remove("spinner");
-   } else {
-      OUTPUT.printElem.innerHTML = "";
-      OUTPUT.printElem.classList.add("spinner");
-   }
-}
-
-OUTPUT.error = function (msg, err) {
-   OUTPUT.toggleSpinner(true);
-   OUTPUT.printElem.classList.add("error");
-   OUTPUT.printElem.innerHTML = msg;
-   if (err) console.error(err);
-}
-
-OUTPUT.print = function (html) {
-   OUTPUT.toggleSpinner();
-   OUTPUT.printElem.classList.remove("error");
-   OUTPUT.printElem.innerHTML = html;
-}
-
 function main () {
-   var check = validInput();
+   var check = INPUT.validInput();
    if (check.wellFormed) {
       OUTPUT.toggleSpinner();
       // we need to give enough time for the spinner to display,
@@ -37,62 +10,13 @@ function main () {
    }
 }
 
-function validInput () {
-   // TODO: Check for well formed input
-   // - [X] FALSE if expression is not in buffer
-   // - [X] TRUE expression has just variables and no operators
-   // - [X] FALSE if variable count if > 10
-   // - [X] FALSE if missmatched parends
-   // - [ ] FALSE if operands do not match operators
-
-   var text = document.querySelector('#raw-input').value;
-   text = interpretSymbols(text).text.replace(/\s+/g, '');
-
-   // FALSE if expression is not in buffer
-   if (text.length === 0) {
-      return {wellFormed: false, detail: "NO_EXP"};
-   }
-
-   // FALSE if variable count if > 10
-   var variables = text.match(ALL_validVar) || [];
-   var operators = text.match(ALL_OPS) || [];
-   if (variables.length > 10) {
-      return {wellFormed: false, detail: "EXP_TOO_LARGE"};
-   }
-
-   // FALSE if missmatched parends
-   var openP  = text.match(/\(/g) || [];
-   var closeP = text.match(/\)/g) || [];
-   if (openP.length !== closeP.length) {
-      return {wellFormed: false, detail: "PAREND_MISMATCH"};
-   }
-
-
-   if (operators.length === 0) {
-      // TRUE expression has just variables and no operators
-      if (variables.length > 0) {
-         return {wellFormed: true};
-      } else {
-         return {wellFormed: false, detail: "NO_OPS_OR_VARS"};
-      }
-   }
-
-   // Default return TRUE, other errors will get caught durring parsing
-   return {wellFormed: true};
-}
-
-
 function computeAndDisplayResults () {
    try {
-      var results = document.querySelector('#raw-results');
-      var text = document.querySelector('#raw-input').value;
-      text = interpretSymbols(text).text.replace(/\s+/g, '');
+      var text  = interpretSymbols(INPUT.elem.value).text.replace(/\s+/g, '');
       var table = parseAsInlineTable(text);
-
       OUTPUT.print(table.toHTML());
-
-      document.querySelector('#json-table').innerHTML = table.toJSON();
-      document.querySelector('#org-table' ).innerHTML = table.toORG();
+      OUTPUT.printORG(table.toORG());
+      OUTPUT.printJSON(table.toJSON());
    } catch (err) {
       OUTPUT.error("Fatal Error: Could not evaluate expression durring parsing.", err);
    }
@@ -130,7 +54,7 @@ function parseAsInlineTable (text) {
       results.push(row);
    });
 
-   return new Table([chars, results]);
+   return new Table({headers:chars, data:results});
 }
 
 function getLocalExecutionString(text, idx) {

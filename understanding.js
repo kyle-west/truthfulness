@@ -3,9 +3,9 @@
 * display formats
 ******************************************************************************/
 
-function Table (data) {
-   this.names = data[0];
-   this.data = data[1];
+function Table (table) {
+   this.headers = table.headers;
+   this.data    = table.data;
 }
 
 Table.prototype = {
@@ -15,7 +15,7 @@ Table.prototype = {
       var html = `<table>${this._headerHTML()}<tbody>`;
       this.data.forEach((row) => {
          html += "<tr>";
-         this.names.forEach((name, index) => {
+         this.headers.forEach((name, index) => {
             html += `<td${validVar.test(name) ? " class='var'" : ""}>${row[index]}</td>`;
          });
          html += "</tr>";
@@ -25,7 +25,7 @@ Table.prototype = {
 
    _headerHTML: function () {
       var html = "<thead><tr>";
-      this.names.forEach((name) => {
+      this.headers.forEach((name) => {
          var cl = "";
          if (["(",")"].includes(name)) {
             cl = " class = 'op parend'"
@@ -51,15 +51,15 @@ Table.prototype = {
 
    toJSON : function () {
       return JSON.stringify({
-         headers: this.names, data: this.data
-      }, null, 2);
+         headers: this.headers, data: this.data
+      }, null, 3);
    },
 
    toORG: function () {
       var org = this._headerORG();
       this.data.forEach((row) => {
          org += "|";
-         this.names.forEach((name, index) => {
+         this.headers.forEach((name, index) => {
             org += " ".repeat(name.length/2)
                 + row[index]
                 + " ".repeat(name.length/2)
@@ -74,8 +74,8 @@ Table.prototype = {
    _headerORG: function () {
       var html = "|";
       var bar  = "|";
-      var last_one = this.names.length -1;
-      this.names.forEach((name, idx) => {
+      var last_one = this.headers.length -1;
+      this.headers.forEach((name, idx) => {
          html += ` ${name} |`;
          bar  += "-".repeat(name.length+2)
               + ((idx === last_one) ? "|" : "+");
