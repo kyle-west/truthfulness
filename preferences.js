@@ -16,7 +16,7 @@ OPTIONS.save = function () {
 }
 
 OPTIONS.restore = function () {
-   OPTIONS.prefs.tableView = OPTIONS.prefs.tableView || "inline";
+   OPTIONS.prefs.tableView = window.localStorage.getItem("prefs-tableView") || "inline";
    OPTIONS.selectCurrents();
 }
 
@@ -24,6 +24,7 @@ OPTIONS.updateCurrent = function () {
    var tv = document.querySelector(`input[name='table-view'][value='inline']`);
    tv = (tv.checked) ? tv : document.querySelector(`input[name='table-view'][value='expanded']`);
    OPTIONS.prefs.tableView = tv.value;
+   window.localStorage.setItem("prefs-tableView", tv.value);
 }
 
 OPTIONS.selectCurrents = function () {
