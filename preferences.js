@@ -17,6 +17,7 @@ OPTIONS.save = function () {
 
 OPTIONS.restore = function () {
    OPTIONS.prefs.tableView = window.localStorage.getItem("prefs-tableView") || "inline";
+   OPTIONS.prefs.trueFalse = window.localStorage.getItem("prefs-trueFalse") || "binary";
    OPTIONS.selectCurrents();
 }
 
@@ -25,10 +26,16 @@ OPTIONS.updateCurrent = function () {
    tv = (tv.checked) ? tv : document.querySelector(`input[name='table-view'][value='expanded']`);
    OPTIONS.prefs.tableView = tv.value;
    window.localStorage.setItem("prefs-tableView", tv.value);
+
+   var bin = document.querySelector(`input[name='true-false'][value='binary']`);
+   bin = (bin.checked) ? bin : document.querySelector(`input[name='true-false'][value='letter']`);
+   OPTIONS.prefs.trueFalse = bin.value;
+   window.localStorage.setItem("prefs-trueFalse", bin.value);
 }
 
 OPTIONS.selectCurrents = function () {
    document.querySelector(`input[name='table-view'][value='${OPTIONS.prefs.tableView}']`).checked = "checked";
+   document.querySelector(`input[name='true-false'][value='${OPTIONS.prefs.trueFalse}']`).checked = "checked";
 }
 
 
