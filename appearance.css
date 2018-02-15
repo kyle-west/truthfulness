@@ -110,12 +110,21 @@ main {
    color: orange;
 }
 .op.nand {
-   font-size: 18pt;
    color: forestgreen;
 }
 .op.parend {
    font-size: 18pt;
    color: grey;
+}
+
+
+.error {
+   background-color: #ff1e1e;
+   color: white;
+   padding: 15px;
+   border-radius: 5px;
+   font-size: 18pt;
+   font-weight: bold;
 }
 
 

@@ -11,6 +11,7 @@ const NOT = "¬";
 const OPS = new RegExp(`(${AND}|${NAND}|${OR}|${XOR}|${NOR}|${NOT}|${IMP}|${IFF})`);
 
 
+const ALL_validVar = new RegExp(validVar, "g");
 const ALL_AND = new RegExp(AND, "g");
 const ALL_NAND = new RegExp(NAND, "g");
 const ALL_OR  = new RegExp(OR,  "g");
