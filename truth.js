@@ -65,6 +65,19 @@ function parseAsInlineTable (text) {
       results.push(row);
    });
 
+   if (OPTIONS.prefs.trueFalse === "letter") {
+      console.log("Converting Bools to Letters (T/F)");
+      var newRes = [], newRow;
+      results.forEach(row => {
+         newRow = []
+         row.forEach(col => {
+            newRow.push((col == 1) ? "T" : "F");
+         });
+         newRes.push(newRow);
+      });
+      results = newRes;
+   }
+
    return new Table({headers:chars, data:results});
 }
 

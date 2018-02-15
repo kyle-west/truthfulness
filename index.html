@@ -50,7 +50,10 @@
             <hr>
             <p><b>Table display:</b> Select how you would like to view the truth table results</p>
             <input id="tv1" type="radio" name="table-view" value="inline"><label for="tv1">Results Inline</label></input><br/>
-            <input id="tv2" type="radio" name="table-view" value="expanded"><label for="tv2">Expanded View</label></input><br/>
+            <input id="tv2" type="radio" name="table-view" value="expanded"><label for="tv2">Expanded View</label></input><br/><br/>
+            <p><b>Boolean Representation:</b> Select which way you would like to have True / False displayed</p>
+            <input id="b1" type="radio" name="true-false" value="binary"><label for="b1">True as "1", False as "0"</label></input><br/>
+            <input id="b2" type="radio" name="true-false" value="letter"><label for="b2">True as "T", False as "F"</label></input><br/>
             <div class="footer">
                <button type="button" class="done" onclick="OPTIONS.save()">Save</button>
                <button type="button" class="cancel" onclick="OPTIONS.close(true)">Cancel</button>
