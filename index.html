@@ -14,6 +14,9 @@
    <body onload="io_init()">
       <main>
          <h1>Truth Table Generator</h1>
+         <div class="settings-btn" onclick="OPTIONS.show()">
+            <svg class="icon-settings size-32"></svg>
+         </div>
          <hr>
          <p>
             Type in an expression, then hit the [Evaluate] button to see the results.
@@ -40,6 +43,20 @@
          Hosted on <a href="https://github.com/kyle-west/truthfulness">GitHub</a>
       </div>
 
+      <div class="modal" id="settings-modal">
+         <div class="content">
+            <h1>Display Options</h1>
+            <hr>
+            <p><b>Table display:</b> Select how you would like to view the truth table results</p>
+            <input type="radio" name="table-view" value="inline">Results Inline</input><br/>
+            <input type="radio" name="table-view" value="expanded">Expanded View</input><br/>
+            <div class="footer">
+               <button type="button" class="done" onclick="OPTIONS.save()">Save</button>
+               <button type="button" class="cancel" onclick="OPTIONS.close(true)">Cancel</button>
+            </div>
+         </div>
+      </div>
+
       <script>
          // return the cursor to its "original" position after pretty print
          document.getElementById("raw-input").addEventListener("input", (e) => {
@@ -49,5 +66,7 @@
             e.target.setSelectionRange(cursorPos, cursorPos);
          });
       </script>
+
+      <script type="text/javascript" src="preferences.js"></script>
    </body>
 </html>

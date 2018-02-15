@@ -117,6 +117,63 @@ main {
    color: grey;
 }
 
+.settings-btn {
+   position: absolute;
+   width: 36px;
+   height: 36px;
+   top: 25px;
+   right: 25px;
+   padding: 4px;
+}
+.settings-btn:hover {
+   border: 1px solid grey;
+   right: 24px;
+   top: 24px;
+   border-radius: 5px;
+   cursor: pointer;
+}
+.settings-btn svg {
+   margin-top: 2px;
+   margin-left: 2px;
+}
+
+.modal {
+   background-color: rgba(120,120,120,.5);;
+   position: absolute;
+   top: 0px;
+   right: 0px;
+   width: 100%;
+   height: 100%;
+   display: block;
+}
+.modal .content {
+   width: 75%;
+   padding: 15px;
+   margin: auto;
+   margin-top: 100px;
+   background-color: white;
+}
+.modal .content .footer {
+   width: 100%;
+   margin-top: 15px;
+   padding-top: 15px;
+   border-top: 1px solid grey;
+   height: 25px;
+}
+.modal .content .footer button {
+   float: right;
+   margin-left: 20px;
+   cursor: pointer;
+}
+.modal .cancel {
+   background-color: white;
+   text-decoration: underline;
+   border: none;
+   margin-top: 2px;
+}
+.modal.hidden {
+   display: none;
+}
 
 .error {
    background-color: #ff1e1e;
@@ -148,4 +205,16 @@ main {
 @keyframes spin {
  0% { transform: rotate(0deg); }
  100% { transform: rotate(360deg); }
+}
+
+
+/* Public Domain Gear Icon
+   SOURCE: http://publicicons.org/gear-icon/
+*/
+svg.icon-settings{
+background: url('data:image/svg+xml;base64,PHN2ZyBpZD0iaWNvbi1nZWFyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHBhdGggZmlsbD0iIzAxMDEwMSIgZD0iTTExNC4yNTEsNzAuNzMxYzIuMjExLDAsNC4yNzEtMS43OTMsNC41NzItMy45ODVjMCwwLDAuNDIyLTMuMDgxLDAuNDIyLTYuNzQ1cy0wLjQyMi02Ljc0NS0wLjQyMi02Ljc0NQ0KCWMtMC4zMDQtMi4xOTMtMi4zNjEtMy45ODYtNC41NzItMy45ODZoLTExLjQzM2MtMi4yMTQsMC00LjUxMi0xLjQxMS01LjEwNi0zLjEzNXMtMS40MTQtNy4yNTUsMC4xNTEtOC44MTlsOC4wOC04LjA4MQ0KCWMxLjU2NC0xLjU2NSwxLjY4Ni00LjIzNiwwLjI2OS01LjkzN2wtOS41MDctOS41MWMtMS43MDEtMS40MTgtNC4zNzEtMS4yOTgtNS45MzgsMC4yNjhsLTguMDgsOC4wODENCgljLTEuNTY0LDEuNTY2LTQuMTczLDIuMTk2LTUuNzkzLDEuNDAyYy0xLjYyLTAuNzk0LTYuMTYzLTQuMTQzLTYuMTYzLTYuMzU2VjUuNzVjMC0yLjIxMy0xLjc5NC00LjI3MS0zLjk4NS00LjU3Mg0KCWMwLDAtMy4wODEtMC40MjQtNi43NDUtMC40MjRzLTYuNzQ1LDAuNDI0LTYuNzQ1LDAuNDI0Yy0yLjE5MywwLjMwMS0zLjk4OCwyLjM1OS0zLjk4OCw0LjU3MnYxMS40MzMNCgljMCwyLjIxMy0xLjQxLDQuNTExLTMuMTM1LDUuMTA2Yy0xLjcyNSwwLjU5NS03LjI1NSwxLjQxNC04LjgyLTAuMTUxbC04LjA4MS04LjA4MWMtMS41NjUtMS41NjUtNC4yMzYtMS42ODYtNS45MzYtMC4yNjkNCglsLTkuNTA5LDkuNTA5Yy0xLjQxOCwxLjcwMS0xLjI5OCw0LjM3MSwwLjI2OCw1LjkzN2w4LjA4LDguMDgxYzEuNTY1LDEuNTY1LDIuMTk3LDQuMTcyLDEuNDAyLDUuNzkyDQoJYy0wLjc5NSwxLjYyLTQuMTQzLDYuMTYzLTYuMzU2LDYuMTYzSDUuNzVjLTIuMjEzLDAtNC4yNzEsMS43OTQtNC41NzMsMy45ODZjMCwwLTAuNDI0LDMuMDgxLTAuNDI0LDYuNzQ0DQoJYzAsMy42NjUsMC40MjQsNi43NDQsMC40MjQsNi43NDRjMC4zMDEsMi4xOTQsMi4zNTksMy45ODcsNC41NzMsMy45ODdoMTEuNDMzYzIuMjEzLDAsNC41MTEsMS40MDksNS4xMDUsMy4xMzUNCgljMC41OTUsMS43MjUsMS40MTQsNy4yNTQtMC4xNTIsOC44MThsLTguMDgsOC4wODFjLTEuNTY1LDEuNTY1LTEuNjg2LDQuMjM2LTAuMjY4LDUuOTM4bDkuNTA4LDkuNTA5DQoJYzEuNzAxLDEuNDE3LDQuMzcsMS4yOTksNS45MzYtMC4yNjlsOC4wODEtOC4wOGMxLjU2NS0xLjU2NCw0LjE3Mi0yLjE5NSw1Ljc5My0xLjQwMWMxLjYyMSwwLjc5NCw2LjE2Miw0LjE0Myw2LjE2Miw2LjM1NXYxMS40MzMNCgljMCwyLjIxMiwxLjc5NCw0LjI3LDMuOTg4LDQuNTdjMCwwLDMuMDgsMC40MjQsNi43NDUsMC40MjRjMy42NjUsMCw2Ljc0NS0wLjQyNCw2Ljc0NS0wLjQyNGMyLjE5My0wLjMwMSwzLjk4NS0yLjM1OCwzLjk4NS00LjU3DQoJdi0xMS40MzNjMC0yLjIxMywxLjQxMS00LjUxMiwzLjEzNi01LjEwNmMxLjcyNi0wLjU5NSw3LjI1Ni0xLjQxMyw4LjgyLDAuMTUxbDguMDgsOC4wODFjMS41NjUsMS41NjMsNC4yMzYsMS42ODYsNS45MzgsMC4yNjgNCglsOS41MDctOS41MDZjMS40MTctMS43MDEsMS4yOTktNC4zNy0wLjI2OS01LjkzOGwtOC4wOC04LjA4Yy0xLjU2NS0xLjU2NC0yLjE5Ny00LjE3Mi0xLjQwMS01Ljc5Mw0KCWMwLjc5NC0xLjYyLDQuMTQzLTYuMTYzLDYuMzU1LTYuMTYzSDExNC4yNTF6IE02MCw4MS42ODdjLTExLjk3NywwLTIxLjY4Ni05LjcwNy0yMS42ODYtMjEuNjg3DQoJYzAtMTEuOTc2LDkuNzA5LTIxLjY4NiwyMS42ODYtMjEuNjg2YzExLjk3NywwLDIxLjY4Nyw5LjcwOSwyMS42ODcsMjEuNjg2QzgxLjY4Nyw3MS45NzcsNzEuOTc3LDgxLjY4Nyw2MCw4MS42ODd6Ii8+DQo8L3N2Zz4=') no-repeat center center / 100%;
+}
+svg.size-32 {
+    width: 32px;
+    height: 32px;
 }
