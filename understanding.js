@@ -16,7 +16,7 @@ Table.prototype = {
       this.data.forEach((row) => {
          html += "<tr>";
          this.headers.forEach((name, index) => {
-            html += `<td${validVar.test(name) ? " class='var'" : ""}>${row[index]}</td>`;
+            html += `<td${validVar_only.test(name) ? " class='var'" : ""}>${row[index]}</td>`;
          });
          html += "</tr>";
       });
@@ -29,7 +29,7 @@ Table.prototype = {
          var cl = "";
          if (["(",")"].includes(name)) {
             cl = " class = 'op parend'"
-         } else if (validVar.test(name)) {
+         } else if (validVar_only.test(name)) {
             cl = " class='var'";
          } else if (OPS.test(name)) {
             switch (name) {

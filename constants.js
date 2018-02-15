@@ -1,4 +1,5 @@
 const validVar = /[a-z]/;
+const validVar_only = /^[a-z]$/;
 const parends  = /(\(.*\)){1}/g;
 const AND = "∧";
 const NAND = "⊼";

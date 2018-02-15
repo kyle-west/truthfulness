@@ -22,7 +22,7 @@
             Type in an expression, then hit the [Evaluate] button to see the results.
          </p>
          <form onsubmit="return false;">
-            <input type="text" id="raw-input" placeholder="Example: p ∨ ¬q">
+            <input type="text" id="raw-input" placeholder="Example: p ∨ ¬q" value="(p ∧ q) ∨ ¬s">
             <input type="submit" class="eval" onclick="main()" value="Evaluate">
          </form>
          <br/><br/>
@@ -43,13 +43,13 @@
          Hosted on <a href="https://github.com/kyle-west/truthfulness">GitHub</a>
       </div>
 
-      <div class="modal" id="settings-modal">
+      <div class="modal hidden" id="settings-modal">
          <div class="content">
             <h1>Display Options</h1>
             <hr>
             <p><b>Table display:</b> Select how you would like to view the truth table results</p>
-            <input type="radio" name="table-view" value="inline">Results Inline</input><br/>
-            <input type="radio" name="table-view" value="expanded">Expanded View</input><br/>
+            <input id="tv1" type="radio" name="table-view" value="inline"><label for="tv1">Results Inline</label></input><br/>
+            <input id="tv2" type="radio" name="table-view" value="expanded"><label for="tv2">Expanded View</label></input><br/>
             <div class="footer">
                <button type="button" class="done" onclick="OPTIONS.save()">Save</button>
                <button type="button" class="cancel" onclick="OPTIONS.close(true)">Cancel</button>

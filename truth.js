@@ -31,16 +31,27 @@ function parseAsInlineTable (text) {
       if (validVar.test(c)) {
          calcs.push(c);
       } else if (OPS.test(c)) {
-         calcs.push(getLocalExecutionString(text, idx));
-      } else {
+         calcs.push(getLocalizedString(text, idx));
+      } else if (OPTIONS.prefs.tableView === "inline") {
          calcs.push(null);
       }
    });
 
+   if (OPTIONS.prefs.tableView === "expanded") {
+      calcs.sort(function(a, b){
+         var ka = a.text || a,
+             kb = b.text || b;
+         if(ka.length < kb.length) return -1;
+         if(ka.length > kb.length) return 1;
+         return 0;
+      });
+      chars = [];
+      calcs.forEach(calc => {
+         chars.push(calc.text || calc);
+      });
+   }
+
    var vars = text.match(new RegExp(validVar, "g"));
-
-   // if (!vars) throw "NO_VARIABLES";
-
    vars.values = generateTruthTable(vars);
    vars.values.forEach(val => {
       var row = [];
@@ -48,7 +59,7 @@ function parseAsInlineTable (text) {
          if (!col) {
             row.push("&nbsp;");
          } else {
-            row.push(evalutate(col, val));
+            row.push(evalutate(col.exe || col, val));
          }
       });
       results.push(row);
@@ -57,8 +68,8 @@ function parseAsInlineTable (text) {
    return new Table({headers:chars, data:results});
 }
 
-function getLocalExecutionString(text, idx) {
-   var rhs = "", lhs = "";
+function getLocalizedString(text, idx) {
+   var rhs = "", lhs = "", eval_text = "";
 
    function nearestRight () {
       var i = idx+1, right = "", parends = 0;
@@ -97,7 +108,8 @@ function getLocalExecutionString(text, idx) {
 
    // NOT does not have a left operand
    if (text[idx] === NOT) {
-      return convertOPStoJS(text[idx] + rhs);
+      eval_text = text[idx] + rhs;
+      return {text: eval_text, exe: convertOPStoJS(eval_text)};
    }
 
    // get left side of operator
@@ -107,7 +119,8 @@ function getLocalExecutionString(text, idx) {
       lhs = nearestLeft();
    }
 
-   return convertOPStoJS(lhs + text[idx] + rhs);
+   eval_text = lhs + text[idx] + rhs;
+   return {text: eval_text, exe: convertOPStoJS(eval_text)};
 }
 
 
