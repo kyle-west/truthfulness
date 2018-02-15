@@ -18,7 +18,7 @@ function computeAndDisplayResults () {
       OUTPUT.printORG(table.toORG());
       OUTPUT.printJSON(table.toJSON());
    } catch (err) {
-      OUTPUT.error("Fatal Error: Could not evaluate expression durring parsing.", err);
+      OUTPUT.error("Fatal Error: Could not evaluate expression during parsing.", err);
    }
 }
 
