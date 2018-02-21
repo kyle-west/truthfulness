@@ -22,12 +22,3 @@ const ALL_NOT = new RegExp(NOT, "g");
 const ALL_IMP = new RegExp(IMP, "g");
 const ALL_IFF = new RegExp(IFF, "g");
 const ALL_OPS = new RegExp(`(${AND}|${NAND}|${OR}|${XOR}|${NOR}|${NOT}|${IMP}|${IFF})`, "g");
-
-
-String.prototype.repeat = function (times) {
-   var str = "", i;
-   for (i = 0; i < times; i++) {
-      str += this;
-   }
-   return str;
-}
