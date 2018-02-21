@@ -38,10 +38,6 @@ td.var, th.var {
    top: 0px;
 }
 
-#raw-results: + #raw-results-sticky-header {
-
-}
-
 #json-table, #org-table {
    width: 100%;
    height: 200px;
