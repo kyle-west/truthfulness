@@ -38,6 +38,7 @@ function parseAsInlineTable (text) {
    });
 
    if (OPTIONS.prefs.tableView === "expanded") {
+      calcs = calcs.getUnique();
       calcs.sort(function(a, b){
          var ka = a.text || a,
              kb = b.text || b;
@@ -51,7 +52,7 @@ function parseAsInlineTable (text) {
       });
    }
 
-   var vars = text.match(new RegExp(validVar, "g"));
+   var vars = text.match(new RegExp(validVar, "g")).getUnique();
    vars.values = generateTruthTable(vars);
    vars.values.forEach(val => {
       var row = [];
