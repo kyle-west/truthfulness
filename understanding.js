@@ -24,7 +24,7 @@ Table.prototype = {
    },
 
    _headerHTML: function () {
-      var html = "<thead><tr>";
+      var html = "<thead id='raw-results-header'><tr>";
       this.headers.forEach((name) => {
          var cl = "";
          if (["(",")"].includes(name)) {
