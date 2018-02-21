@@ -1,5 +1,5 @@
-const validVar = /[a-z]/;
-const validVar_only = /^[a-z]$/;
+const validVar = /[A-z]/;
+const validVar_only = /^[A-z]$/;
 const parends  = /(\(.*\)){1}/g;
 const AND = "∧";
 const NAND = "⊼";
