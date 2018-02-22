@@ -72,7 +72,11 @@ function parseAsInlineTable (text) {
       results.forEach(row => {
          newRow = []
          row.forEach(col => {
-            newRow.push((col == 1) ? "T" : "F");
+            if (isNaN(col)) {
+               newRow.push(col)
+            } else {
+               newRow.push((col == 1) ? "T" : "F");
+            }
          });
          newRes.push(newRow);
       });
