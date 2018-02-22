@@ -124,6 +124,8 @@ function getLocalizedString(text, idx) {
       rhs = nearestRight();
    }
 
+   if (!rhs || rhs === "") throw new Error("RHS_REQUIRED_FOR_OP", text[idx], idx);
+
    // NOT does not have a left operand
    if (text[idx] === NOT) {
       eval_text = text[idx] + rhs;
@@ -136,6 +138,8 @@ function getLocalizedString(text, idx) {
    } else {
       lhs = nearestLeft();
    }
+
+   if (!lhs || lhs === "") throw new Error("LHS_REQUIRED_FOR_OP", text[idx], idx);
 
    eval_text = lhs + text[idx] + rhs;
    return {text: eval_text, exe: convertOPStoJS(eval_text)};
