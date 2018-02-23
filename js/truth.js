@@ -135,6 +135,9 @@ function getLocalizedString(text, idx) {
    // get left side of operator
    if (validVar.test(text[idx-1])) {
       lhs = text[idx-1];
+      if (text[idx-2] === NOT) {
+         lhs = text[idx-2] + lhs;
+      }
    } else {
       lhs = nearestLeft();
    }
