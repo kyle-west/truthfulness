@@ -1,3 +1,5 @@
+/** THIS IS A POST-BODY-CONTENT DOCUMENT **/
+
 const OUTPUT = {};
 const INPUT  = {};
 
@@ -85,6 +87,14 @@ function io_init () {
    OUTPUT.orgElem = OUTPUT.orgElem || document.getElementById('org-table');
    INPUT.elem = INPUT.elem || document.getElementById('raw-input');
    INPUT.focus()
+   
+   // return the cursor to its "original" position after pretty print
+   document.getElementById("raw-input").addEventListener("input", (e) => {
+      var prettyText = interpretSymbols(e.target.value);
+      var cursorPos  = e.target.selectionStart + prettyText.sizeDiff;
+      e.target.value = prettyText.text;
+      e.target.setSelectionRange(cursorPos, cursorPos);
+   });
 }
 
 function copyToClipboard (elem) {
