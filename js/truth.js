@@ -103,16 +103,29 @@ function getLocalizedString(text, idx) {
       return right;
    }
 
-   function nearestLeft () {
-      var i = idx-1, left = "", parends = 0;
+   function nearestLeft (index) {
+      var i = (index) ? index-1 : idx-1, left = "", parends = 0;
       do {
          if (text[i] === ")") parends++;
          if (text[i] === "(") parends--;
          left = text[i] + left;
          i--;
-      } while (parends > 0);
+      } while (parends > 0 && i > 0);
       if (text[i] === NOT) {
          left = text[i] + left;
+         i--;
+      }
+      if (i > 0 && OPS.test(text[i])) {
+         left = nearestLeft(i) + text[i] + left;
+      }
+      if ((left[left.length-1] === ")")) {
+         var openP  = left.match(/\(/g) || [];
+         var closeP = left.match(/\)/g) || [];
+         if (openP.length !== closeP.length) {
+            console.warn("Auto-correction on text:'"+left
+                        +"' by adding a '(' to the left during parsing.");
+            left = "(" + left;
+         }
       }
       return left;
    }
@@ -132,15 +145,7 @@ function getLocalizedString(text, idx) {
       return {text: eval_text, exe: convertOPStoJS(eval_text)};
    }
 
-   // get left side of operator
-   if (validVar.test(text[idx-1])) {
-      lhs = text[idx-1];
-      if (text[idx-2] === NOT) {
-         lhs = text[idx-2] + lhs;
-      }
-   } else {
-      lhs = nearestLeft();
-   }
+   lhs = nearestLeft();
 
    if (!lhs || lhs === "") throw new Error("LHS_REQUIRED_FOR_OP", text[idx], idx);
 
