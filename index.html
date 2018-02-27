@@ -23,7 +23,7 @@
             Type in an expression, then hit the [Evaluate] button to see the results.
          </p>
          <form onsubmit="return false;">
-            <input type="text" id="raw-input" placeholder="Example: p ∨ ¬q">
+            <input type="text" id="raw-input" placeholder="Example: p ∨ ¬q" data-gramm="false">
             <input type="submit" class="eval" onclick="main()" value="Evaluate">
          </form>
          <br/><br/>
@@ -32,7 +32,7 @@
          <div class="notify">Copied!</div>
          <div class="box-70">
             <input type="button" onclick="copyAsORG()" value="Copy as ORG Table">
-            <textarea id='org-table'></textarea>
+            <textarea id='org-table' data-gramm="false"></textarea>
          </div>
          <div class="box-30">
             <input type="button" onclick="copyAsJSON()" value="Copy as JSON"><br/>
